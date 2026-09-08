@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 90" fill="none" width="100%" height="100%">
+  <!-- Left Pill container with FUTURE text -->
+  <rect x="5" y="5" width="235" height="80" rx="18" fill="#0f172a" stroke="#38bdf8" stroke-width="2" stroke-opacity="0.3"/>
+  <text x="122" y="57" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="42" font-weight="900" fill="#ffffff" letter-spacing="1.5" text-anchor="middle">FUTURE</text>
+  
+  <!-- Right text FORCE -->
+  <text x="265" y="57" font-family="'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="42" font-weight="900" fill="#f8fafc" letter-spacing="1.5" text-anchor="start">FORCE</text>
+  
+  <!-- Subtle futuristic indicator dot / accent -->
+  <circle cx="445" cy="38" r="4" fill="#38bdf8" />
+</svg>

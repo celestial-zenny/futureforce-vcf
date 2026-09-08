@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futureforce VCF Generator</title>
+  <meta name="description" content="Batch convert contact numbers into a downloadable .vcf file for WhatsApp, Android, and iOS.">
+  <meta property="og:title" content="Futureforce VCF Generator">
+  <meta property="og:description" content="Batch convert contact numbers into a downloadable .vcf file for WhatsApp, Android, and iOS.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- FontAwesome via CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #020617;
+      color: #f8fafc;
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(51, 65, 85, 0.6);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-slate-950 flex flex-col justify-between items-center px-4 py-8 relative overflow-x-hidden selection:bg-cyan-500 selection:text-black">
+
+  <!-- Ambient high-tech background lighting -->
+  <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-cyan-600/10 blur-[140px] rounded-full pointer-events-none -z-10"></div>
+  <div class="fixed bottom-10 right-10 w-[450px] h-[350px] bg-emerald-600/10 blur-[130px] rounded-full pointer-events-none -z-10"></div>
+
+  <!-- Top bar status indicator -->
+  <header class="w-full max-w-2xl mx-auto mb-6 flex justify-between items-center text-xs text-slate-400">
+    <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-3.5 py-1.5 rounded-full shadow-sm">
+      <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+      <span class="font-medium text-slate-200">Futureforce VCF Engine</span>
+      <span class="text-slate-600">•</span>
+      <span class="text-slate-400 font-mono">Standalone Edition</span>
+    </div>
+    <div class="flex items-center gap-1.5 text-slate-400">
+      <i class="fa-solid fa-address-card text-cyan-400"></i>
+      <span>vCard 3.0 Standard</span>
+    </div>
+  </header>
+
+  <!-- Main Card Container -->
+  <main class="w-full max-w-2xl mx-auto">
+    <div class="glass-card rounded-3xl p-6 sm:p-9 shadow-2xl shadow-slate-950/90 relative overflow-hidden transition-all duration-300">
+      
+      <!-- Card top ambient light bar -->
+      <div class="absolute top-0 inset-x-0 h-[1.5px] bg-gradient-to-r from-transparent via-cyan-500/60 to-transparent"></div>
+
+      <!-- Header with Logo -->
+      <div class="flex flex-col items-center text-center mb-7">
+        <!-- Company Logo Badge -->
+        <div class="mb-4">
+          <div class="flex items-center gap-2.5 bg-slate-950 border border-slate-800 p-2 sm:p-2.5 rounded-2xl shadow-lg">
+            <div class="bg-black text-white px-4 py-2 sm:px-5 sm:py-2 rounded-xl font-black text-xl sm:text-2xl tracking-wider shadow-inner border border-slate-800/60">
+              FUTURE
+            </div>
+            <div class="text-slate-100 font-black text-xl sm:text-2xl tracking-wider pr-3">
+              FORCE
+            </div>
+          </div>
+        </div>
+
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+          Futureforce VCF Generator
+        </h1>
+        <p class="text-sm text-slate-400 mt-2 max-w-md leading-relaxed">
+          Compile contact numbers into a standardized <code class="text-cyan-400 bg-slate-950 px-1.5 py-0.5 rounded font-mono text-xs">.vcf</code> file for one-tap WhatsApp status view gains and seamless Android &amp; iOS import.
+        </p>
+      </div>
+
+      <!-- Generator Settings Section -->
+      <div class="space-y-4 mb-5">
+        <div class="bg-slate-950/60 border border-slate-800 rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between text-xs text-slate-300 font-bold uppercase tracking-wider">
+            <span class="flex items-center gap-1.5">
+              <i class="fa-solid fa-sliders text-cyan-400"></i>
+              <span>Compiler Configuration</span>
+            </span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Save Prefix</label>
+              <input 
+                type="text" 
+                id="saveNamePrefix" 
+                value="Futureforce" 
+                placeholder="e.g. Futureforce" 
+                oninput="updateCountBadge()"
+                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 placeholder-slate-600 focus:outline-none focus:border-cyan-500 font-medium"
+              >
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">Starting Number</label>
+              <input 
+                type="number" 
+                id="startCounter" 
+                value="1" 
+                min="1" 
+                oninput="updateCountBadge()"
+                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-500 font-mono"
+              >
+            </div>
+
+            <div>
+              <label class="block text-[11px] font-semibold text-slate-300 mb-1">File Name (.vcf)</label>
+              <input 
+                type="text" 
+                id="outputFileName" 
+                value="Futureforce_Contacts.vcf" 
+                placeholder="contacts.vcf" 
+                class="w-full bg-slate-900 border border-slate-800 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-cyan-500 font-mono"
+              >
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs text-slate-300">
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="autoCountryCode" checked onchange="updateCountBadge()" class="rounded bg-slate-900 border-slate-700 text-cyan-500 w-4 h-4">
+              <span>Auto-prepend country code (default <code class="text-cyan-400 font-mono">+234</code>)</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer">
+              <input type="checkbox" id="removeDupes" checked onchange="updateCountBadge()" class="rounded bg-slate-900 border-slate-700 text-cyan-500 w-4 h-4">
+              <span>Remove duplicate phone numbers</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Textarea input -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5 text-xs text-slate-300 font-medium">
+            <label class="flex items-center gap-1.5 font-semibold">
+              <i class="fa-regular fa-file-lines text-cyan-400"></i>
+              <span>Paste Contacts &amp; Numbers</span>
+            </label>
+            <div class="flex items-center gap-2 text-xs">
+              <button 
+                type="button" 
+                onclick="loadSampleContacts()" 
+                class="text-cyan-400 hover:text-cyan-300 font-medium flex items-center gap-1 cursor-pointer transition-colors"
+              >
+                <i class="fa-solid fa-wand-magic-sparkles text-[10px]"></i>
+                <span>Load Sample</span>
+              </button>
+              <span class="text-slate-700">|</span>
+              <button 
+                type="button" 
+                onclick="clearContacts()" 
+                class="text-rose-400 hover:text-rose-300 cursor-pointer flex items-center gap-1 transition-colors"
+              >
+                <i class="fa-regular fa-trash-can text-[10px]"></i>
+                <span>Clear</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="relative">
+            <textarea 
+              id="contactList" 
+              rows="7" 
+              oninput="updateCountBadge()"
+              placeholder="Paste raw phone numbers or names (one per line):&#10;John Doe, 08012345678&#10;Sarah Connor - +14155552671&#10;09098765432&#10;+447911123456&#10;08123456789"
+              class="w-full bg-slate-950 border border-slate-800 rounded-2xl p-4 text-xs sm:text-sm text-slate-200 font-mono placeholder-slate-600 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all leading-relaxed"
+            ></textarea>
+
+            <div class="absolute bottom-3 right-3 flex items-center gap-2 bg-slate-900/90 border border-slate-800 px-3 py-1 rounded-xl text-xs font-mono shadow-sm">
+              <span class="text-slate-400">Valid:</span>
+              <span id="detectedBadge" class="font-bold text-slate-500">0</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Alert messages container -->
+        <div id="alertContainer" class="hidden"></div>
+
+        <!-- Action Button -->
+        <button 
+          type="button" 
+          onclick="generateAndDownloadVCF()" 
+          class="w-full flex items-center justify-center gap-2.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:via-blue-500 hover:to-indigo-500 text-slate-950 font-black text-base py-4 px-6 rounded-2xl transition-all duration-200 shadow-xl shadow-cyan-500/20 active:scale-[0.99] cursor-pointer"
+        >
+          <i class="fa-solid fa-download text-lg text-slate-950"></i>
+          <span>Compile &amp; Download VCF File</span>
+        </button>
+
+        <!-- Secondary Exports -->
+        <div class="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onclick="exportCSV()"
+            class="flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white py-2.5 rounded-xl text-xs font-semibold cursor-pointer transition-all"
+          >
+            <i class="fa-solid fa-file-csv text-emerald-400"></i>
+            <span>Export CSV</span>
+          </button>
+          <button
+            type="button"
+            onclick="copyAllNumbers()"
+            class="flex items-center justify-center gap-2 bg-slate-950 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white py-2.5 rounded-xl text-xs font-semibold cursor-pointer transition-all"
+          >
+            <i class="fa-regular fa-copy text-cyan-400"></i>
+            <span id="copyNumbersLabel">Copy Numbers</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="relative my-7">
+        <div class="absolute inset-0 flex items-center">
+          <div class="w-full border-t border-slate-800/80"></div>
+        </div>
+        <div class="relative flex justify-center text-xs uppercase">
+          <span class="bg-slate-900 px-3 text-slate-500 font-semibold tracking-wider">
+            Community Access
+          </span>
+        </div>
+      </div>
+
+      <!-- Primary WhatsApp Community Gateway Card -->
+      <div class="bg-slate-950/80 border border-emerald-900/40 rounded-2xl p-5 relative overflow-hidden shadow-inner group">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-10 h-10 rounded-xl bg-emerald-950/80 border border-emerald-800/60 flex items-center justify-center text-[#25D366]">
+            <i class="fa-brands fa-whatsapp text-2xl"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-white">Join the Futureforce Ecosystem</h3>
+            <p class="text-xs text-slate-400">Direct networking, collaborative opportunities &amp; tech updates</p>
+          </div>
+        </div>
+
+        <a 
+          href="https://chat.whatsapp.com/K6cRji0kD4Y6tE98374oj3" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="w-full flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#20ba59] active:scale-[0.98] text-slate-950 font-bold text-base py-3.5 px-5 rounded-xl transition-all duration-200 shadow-lg shadow-emerald-600/20 cursor-pointer"
+        >
+          <i class="fa-brands fa-whatsapp text-2xl text-slate-950"></i>
+          <span>Join Our Official WhatsApp Community</span>
+          <i class="fa-solid fa-arrow-up-right-from-square text-xs text-slate-950"></i>
+        </a>
+
+        <div class="flex items-center justify-between mt-3 text-[11px] text-slate-400 pt-1">
+          <span class="flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            <span>Direct group invite verified</span>
+          </span>
+          <button 
+            type="button" 
+            onclick="copyCommunityLink()" 
+            class="text-slate-400 hover:text-slate-200 flex items-center gap-1 cursor-pointer transition-colors"
+          >
+            <i class="fa-regular fa-copy"></i>
+            <span id="copyLinkText">Copy Link</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full max-w-md mx-auto text-center mt-8 text-xs text-slate-400 space-y-1">
+    <p class="font-semibold text-slate-400 tracking-wide">
+      Powered by Futureforce
+    </p>
+    <p class="text-[11px] text-slate-500">
+      Client-Side Zero-Storage Privacy • All data processed locally &copy; <span id="currentYear"></span>
+    </p>
+  </footer>
+
+  <script>
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    const SAMPLE_DATA = `John Doe, 08012345678
+Sarah Connor, +14155552671
+Alex Rivera - +447911123456
+09098765432
+08123456789
+David Sterling, +2348123456789
+Elena Rostova: +33612345678`;
+
+    function loadSampleContacts() {
+      document.getElementById('contactList').value = SAMPLE_DATA;
+      updateCountBadge();
+    }
+
+    function clearContacts() {
+      document.getElementById('contactList').value = '';
+      updateCountBadge();
+      hideStatus();
+    }
+
+    function showStatus(message, isSuccess) {
+      const box = document.getElementById('alertContainer');
+      box.textContent = message;
+      box.className = isSuccess 
+        ? 'flex items-center gap-2 bg-emerald-950/70 border border-emerald-800 text-emerald-300 text-xs px-3.5 py-2.5 rounded-xl'
+        : 'flex items-center gap-2 bg-rose-950/70 border border-rose-800 text-rose-300 text-xs px-3.5 py-2.5 rounded-xl';
+    }
+
+    function hideStatus() {
+      const box = document.getElementById('alertContainer');
+      box.className = 'hidden';
+    }
+
+    function parseContacts(rawText, prefix, startIdx) {
+      const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      const autoCountry = document.getElementById('autoCountryCode').checked;
+      const removeDupes = document.getElementById('removeDupes').checked;
+      const seen = new Set();
+      const results = [];
+      let counter = startIdx;
+
+      for (const line of lines) {
+        let name = '';
+        let phone = '';
+
+        if (line.includes(',') || line.includes(':') || line.includes(' - ') || line.includes('\t')) {
+          const parts = line.split(/[,:\t]|\s-\s/).map(p => p.trim()).filter(Boolean);
+          if (parts.length >= 2) {
+            const firstIsPhone = /^[\d\s+()-]{6,}$/.test(parts[0]);
+            if (firstIsPhone) {
+              phone = parts[0];
+              name = parts.slice(1).join(' ');
+            } else {
+              name = parts[0];
+              phone = parts.slice(1).join(' ');
+            }
+          } else {
+            phone = line;
+          }
+        } else {
+          const match = line.match(/(?:\+?\d{1,4}[\s-]?)?(?:\(?\d{2,4}\)?[\s-]?)?[\d\s-]{6,15}\d/);
+          if (match) {
+            phone = match[0].trim();
+            name = line.replace(phone, '').trim();
+          } else {
+            phone = line.trim();
+          }
+        }
+
+        let cleanPhone = phone.replace(/[^\d+]/g, '');
+
+        if (autoCountry && cleanPhone) {
+          if (cleanPhone.startsWith('0') && !cleanPhone.startsWith('00')) {
+            cleanPhone = '+234' + cleanPhone.slice(1);
+          } else if (!cleanPhone.startsWith('+')) {
+            cleanPhone = '+234' + cleanPhone;
+          }
+        }
+
+        if (cleanPhone.replace(/\D/g, '').length >= 6) {
+          if (removeDupes && seen.has(cleanPhone)) continue;
+          seen.add(cleanPhone);
+
+          const padded = String(counter).padStart(3, '0');
+          let fullName = name ? `${prefix} - ${name}` : `${prefix} ${padded}`;
+          results.push({ fullName, phone: cleanPhone });
+          counter++;
+        }
+      }
+
+      return results;
+    }
+
+    function updateCountBadge() {
+      const text = document.getElementById('contactList').value;
+      const prefix = document.getElementById('saveNamePrefix').value.trim();
+      const startIdx = parseInt(document.getElementById('startCounter').value) || 1;
+      const parsed = parseContacts(text, prefix, startIdx);
+      const badge = document.getElementById('detectedBadge');
+      badge.textContent = parsed.length;
+      badge.className = parsed.length > 0 ? 'font-bold text-emerald-400' : 'font-bold text-slate-500';
+    }
+
+    function generateAndDownloadVCF() {
+      hideStatus();
+      const rawText = document.getElementById('contactList').value;
+      const prefix = document.getElementById('saveNamePrefix').value.trim();
+      const startIdx = parseInt(document.getElementById('startCounter').value) || 1;
+      let fileName = document.getElementById('outputFileName').value.trim() || 'Futureforce_Contacts.vcf';
+      if (!fileName.endsWith('.vcf')) fileName += '.vcf';
+
+      const contacts = parseContacts(rawText, prefix, startIdx);
+
+      if (contacts.length === 0) {
+        showStatus('Please paste at least one valid phone number or contact entry.', false);
+        return;
+      }
+
+      let vcfContent = '';
+      contacts.forEach(c => {
+        vcfContent += 'BEGIN:VCARD\r\n';
+        vcfContent += 'VERSION:3.0\r\n';
+        vcfContent += 'FN:' + c.fullName + '\r\n';
+        vcfContent += 'N:;' + c.fullName + ';;;\r\n';
+        vcfContent += 'TEL;TYPE=CELL:' + c.phone + '\r\n';
+        vcfContent += 'END:VCARD\r\n';
+      });
+
+      const blob = new Blob([vcfContent], { type: 'text/vcard;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      showStatus('Success! Downloaded ' + fileName + ' with ' + contacts.length + ' contacts.', true);
+    }
+
+    function exportCSV() {
+      const rawText = document.getElementById('contactList').value;
+      const prefix = document.getElementById('saveNamePrefix').value.trim();
+      const startIdx = parseInt(document.getElementById('startCounter').value) || 1;
+      const contacts = parseContacts(rawText, prefix, startIdx);
+
+      if (contacts.length === 0) {
+        showStatus('No contacts to export.', false);
+        return;
+      }
+
+      let csv = 'Name,Phone Number\r\n';
+      contacts.forEach(c => {
+        csv += `"${c.fullName.replace(/"/g, '""')}",${c.phone}\r\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Futureforce_Contacts.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    function copyAllNumbers() {
+      const rawText = document.getElementById('contactList').value;
+      const prefix = document.getElementById('saveNamePrefix').value.trim();
+      const startIdx = parseInt(document.getElementById('startCounter').value) || 1;
+      const contacts = parseContacts(rawText, prefix, startIdx);
+
+      if (contacts.length === 0) return;
+      const text = contacts.map(c => c.phone).join('\n');
+      navigator.clipboard.writeText(text);
+
+      const label = document.getElementById('copyNumbersLabel');
+      label.textContent = 'Copied!';
+      setTimeout(() => { label.textContent = 'Copy Numbers'; }, 2000);
+    }
+
+    function copyCommunityLink() {
+      navigator.clipboard.writeText('https://chat.whatsapp.com/K6cRji0kD4Y6tE98374oj3');
+      const text = document.getElementById('copyLinkText');
+      text.textContent = 'Copied!';
+      setTimeout(() => { text.textContent = 'Copy Link'; }, 2000);
+    }
+  </script>
+</body>
+</html>
